@@ -1,3 +1,4 @@
+# Import all the required libraries
 import os
 import sys
 from src.exceptions import CustomException
@@ -9,12 +10,14 @@ from dataclasses import dataclass
 from src.components.data_transformation import DataTransformation, DataTransformationConfig
 from src.components.model_trainer import ModelTrainer, ModelTrainerConfig
 
+# Initialize Data Ingestion Configuration
 @dataclass
 class DataIngestionConfig:
     train_data_path: str = os.path.join('artifacts','train.csv')
     test_data_path: str = os.path.join('artifacts','test.csv')
     raw_data_path: str = os.path.join('artifacts','data.csv')
 
+# Create a class for Data Ingestion
 class DataIngestion:
     def __init__(self):
         self.ingestion_config = DataIngestionConfig()
@@ -45,6 +48,8 @@ class DataIngestion:
         except Exception as e:
             logging.info('Exception occured at Data Ingestion stage')
             raise CustomException(e, sys)
+    
+# Run Data ingestion
 if __name__ == '__main__':
     obj = DataIngestion()
     train_data, test_data = obj.initate_data_ingestion()
